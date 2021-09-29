@@ -1,0 +1,46 @@
+body{
+  background-color: #060A1A;
+  color: #FFFFFF;
+}
+
+.contenedor{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.header{
+  min-height: 90px;
+}
+
+article{
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items:  center;
+}
+
+.fila{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.celda{
+  background-color: #1B223B;
+  min-width: 100px;
+  min-height: 100px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+.tabla_in{
+  background-color: #1B223B;
+  max-width: 15px;
+  color: #FFFFFF;
+  border:none
+
+}

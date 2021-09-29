@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>8 puzzle</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <div class="contenedor header">
+      <h1>Resolutor de 8 puzzle por medio de enfriamiento artifical</h1>
+    </div>
+    <div class="contenedor">
+      <article>
+        <p>
+          Inserta la posicion inicial del 8puzzle
+        </p>
+        <p>
+          Solo numeros enteros del 1 al 8
+        </p>
+        <div id="tabla_input">
+          <div class="fila">
+            <div class="celda">
+              <input type="text" id="00i" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="01i" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="02i" value="" class="tabla_in">
+            </div>
+          </div>
+          <div class="fila">
+            <div class="celda">
+              <input type="text" id="10i" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="11i" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="12i" value="" class="tabla_in">
+            </div>
+          </div>
+          <div class="fila">
+            <div class="celda">
+              <input type="text" id="20i" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="21i" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="22i" value="" class="tabla_in">
+            </div>
+          </div>
+        </div>
+      </article>
+      <article>
+        <p>
+          Inserta la posicion final del 8puzzle
+        </p>
+        <p>
+          Solo numeros enteros del 1 al 8
+        </p>
+        <div id="tabla_output">
+          <div class="fila">
+            <div class="celda">
+              <input type="text" id="00e" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="01e" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="02e" value="" class="tabla_in">
+            </div>
+          </div>
+          <div class="fila">
+            <div class="celda">
+              <input type="text" id="10e" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="11e" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="12e" value="" class="tabla_in">
+            </div>
+          </div>
+          <div class="fila">
+            <div class="celda">
+              <input type="text" id="20e" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="21e" value="" class="tabla_in">
+            </div>
+            <div class="celda">
+              <input type="text" id="22e" value="" class="tabla_in">
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="contenedor">
+      <button type="button" class="btn btn-dark" onclick="main()">Resolver</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="valida.js"></script>
+    <script src="est_datos.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
