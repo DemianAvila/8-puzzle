@@ -1,7 +1,7 @@
 class Celda {
   constructor(columna, fila, dato) {
-    this.columna=fila;
-    this.fila=columna;
+    this.columna=columna;
+    this.fila=fila;
     this.dato=dato;
   }
   getColumna(){
@@ -27,7 +27,12 @@ class Celda {
 //tabla, conjunto ordenado de celdas
 class Tabla {
   constructor(celdas) {
-    this.celdas=celdas;
+    let n_celdas=[];
+    celdas.forEach((item, i) => {
+      let n_celda=new Celda (item.getColumna(), item.getFila(), item.getDato());
+      n_celdas.push(n_celda);
+    });
+    this.celdas=n_celdas;
   }
   //retorna todas las celdas
   getCeldas(){
@@ -36,8 +41,12 @@ class Tabla {
   //regresa el objeto celda
   getCelda(col, fil){
     let celda=this.getCeldas().filter(x => x.getColumna()==col && x.getFila()==fil);
-
-    return celda;
+    if (celda.length==0){
+      return undefined;
+    }
+    else{
+    return celda[0];
+  }
   }
   //regresa una lista con las celdas de la columna
   getFullColumna(col){
@@ -66,34 +75,64 @@ class Tabla {
     let derecha=this.getCelda((celda.getFila()),(celda.getColumna())+1);
     let izquierda=this.getCelda((celda.getFila()),(celda.getColumna())-1);
     let adyacentes=[arriba, abajo, izquierda, derecha];
-    adyacentes=adyacentes.filter(x => x.length>0);
+    adyacentes=adyacentes.filter(x => x!=undefined);
     return adyacentes;
   }
   //obten la celda que no tiene valor
   getNull(){
     let nullCel=this.getCeldas().filter(x => x.getDato()==null);
-    nullCel=nullCel[0];
-    return nullCel;
+    if (nullCel.length==0){
+      return undefined;
+    }
+    else{
+      return nullCel[0];
+    }
   }
+  /*
   //intercambia los datos de una celda a otra
   interDatos(celdaDesde, celdaHacia){
     let tmpDato=celdaDesde.getDato();
     celdaDesde.setDato(celdaHacia.getDato());
     celdaHacia.setDato(tmpDato);
-  }
+  }*/
   //encuentra una celda por su dato
   findDato(dato){
     let celda_dato=this.getCeldas().filter(x => x.getDato()==dato);
-    return celda_dato[0];
+    console.log(celda_dato);
+    if (celda_dato.length==0){
+      return undefined;
+    }
+    else{
+      return celda_dato[0];
+    }
   }
 }
+
+
+//intercambia las celdas de una cuadriula
+//recibe la tabla, la celda inicio  y la celda destino
+//retorna una nueva tabla
+
+function interDatos(tab, ini, des){
+  let n_tab= new Tabla(tab.getCeldas());
+  let ini_copia=n_tab.getCelda(ini.getColumna(), ini.getFila());
+  let des_copia=n_tab.getCelda(des.getColumna(), des.getFila());
+  n_des=new Celda(des.getColumna(), des.getFila(), des.getDato());
+  n_ini=new Celda(ini.getColumna(), ini.getFila(), ini.getDato());
+  ini_copia.setDato(n_des.getDato());
+  des_copia.setDato(n_ini.getDato());
+  return n_tab;
+
+}
+
+
 
 function convierteACeldas(lista_datos){
   let lista_objetos=[];
   lista_datos.forEach((item, i) => {
     //el primer caracter del primer elemento es la columna
-    columna=parseInt(item[0][0]);
-    fila=parseInt(item[0][1]);
+    columna=parseInt(item[0][1]);
+    fila=parseInt(item[0][0]);
     if (item[1]==null){
       dato=item[1];
     }
@@ -108,6 +147,8 @@ function convierteACeldas(lista_datos){
 }
 
 function compara_tablas(tabla1, tabla2){
+  console.log(tabla1);
+  console.log(tabla2);
   //iterar sobre cada celda de la tabla2
   //compararla con el dato de la tabla 1
   puntaje=0;
@@ -120,7 +161,9 @@ function compara_tablas(tabla1, tabla2){
     //si no
     else{
       //restar columna y fila del dato de la tabla 2
+      //console.log(item.getDato())
       let celda_tabla1=tabla1.findDato(item.getDato());
+      //console.log(celda_tabla1)
       let col=Math.abs(item.getColumna()-celda_tabla1.getColumna());
       let fil=Math.abs(item.getFila()-celda_tabla1.getFila());
       let punt=(col+fil)*(-1);
