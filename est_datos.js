@@ -98,7 +98,6 @@ class Tabla {
   //encuentra una celda por su dato
   findDato(dato){
     let celda_dato=this.getCeldas().filter(x => x.getDato()==dato);
-    console.log(celda_dato);
     if (celda_dato.length==0){
       return undefined;
     }
@@ -147,8 +146,6 @@ function convierteACeldas(lista_datos){
 }
 
 function compara_tablas(tabla1, tabla2){
-  console.log(tabla1);
-  console.log(tabla2);
   //iterar sobre cada celda de la tabla2
   //compararla con el dato de la tabla 1
   puntaje=0;
@@ -160,10 +157,7 @@ function compara_tablas(tabla1, tabla2){
     }
     //si no
     else{
-      //restar columna y fila del dato de la tabla 2
-      //console.log(item.getDato())
       let celda_tabla1=tabla1.findDato(item.getDato());
-      //console.log(celda_tabla1)
       let col=Math.abs(item.getColumna()-celda_tabla1.getColumna());
       let fil=Math.abs(item.getFila()-celda_tabla1.getFila());
       let punt=(col+fil)*(-1);
@@ -171,4 +165,18 @@ function compara_tablas(tabla1, tabla2){
     }
   });
   return(puntaje);
+}
+
+//----------------------------------------------
+//ordena la lista de objetos por puntaje
+//usa metodo quick
+function qs(arr){
+  if (arr.length==0){
+    return []
+  }
+  else {
+    var pivote=arr.pop();
+    return [].concat(qs(arr.filter((x)=>x.puntaje>pivote.puntaje)), [pivote], qs(arr.filter((x)=>x.puntaje<=pivote.puntaje)))
+  }
+
 }

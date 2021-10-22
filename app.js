@@ -26,14 +26,21 @@ function main(){
       let adyacentes=inicio.getAdyacentes(inicio.getNull());
       //crear una nueva tabla por cada adyacente dispobible
       //esa tabla hipotetica es el dato alternado con el vacío
-      let tabla_hipo=[];
+      //obtener el puntaje del comparativo del estado actual
+      //almacenalo en una pila ordenado de aquel con el puntaje mas alto
+      let tabla_movimientos=[];
       adyacentes.forEach((item, i) => {
         let hip=interDatos(inicio, inicio.getNull(), item);
         let puntaje=compara_tablas(hip, final);
-        tabla_hipo.push(hip)
+        movimiento={
+          estado:hip,
+          puntaje:puntaje
+        }
+        tabla_movimientos.push(movimiento)
       });
 
-      //console.log(tabla_hipo);
+      console.log(tabla_movimientos);
+      console.log(qs(tabla_movimientos));
       break;
     }while (JSON.stringify(inicio)!=JSON.stringify(final));
   }
