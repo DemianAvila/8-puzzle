@@ -176,7 +176,7 @@ function qs(arr){
   }
   else {
     var pivote=arr.pop();
-    return [].concat(qs(arr.filter((x)=>x.puntaje>pivote.puntaje)), [pivote], qs(arr.filter((x)=>x.puntaje<=pivote.puntaje)))
+    return [].concat(qs(arr.filter((x)=>x.puntaje<pivote.puntaje)), [pivote], qs(arr.filter((x)=>x.puntaje>=pivote.puntaje)))
   }
 
 }
