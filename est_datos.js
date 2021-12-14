@@ -70,10 +70,10 @@ class Tabla {
   }
   //devuelve un objeto con las celdas adyadentes y sus posiciones
   getAdyacentes(celda){
-    let arriba=this.getCelda((celda.getFila()-1),(celda.getColumna()));
-    let abajo=this.getCelda((celda.getFila()+1),(celda.getColumna()));
-    let derecha=this.getCelda((celda.getFila()),(celda.getColumna())+1);
-    let izquierda=this.getCelda((celda.getFila()),(celda.getColumna())-1);
+    let arriba=this.getCelda((celda.getColumna()),(celda.getFila())-1);
+    let abajo=this.getCelda((celda.getColumna()),(celda.getFila()+1));
+    let derecha=this.getCelda((celda.getColumna()+1), (celda.getFila()));
+    let izquierda=this.getCelda((celda.getColumna()-1), (celda.getFila()));
     let adyacentes=[arriba, abajo, izquierda, derecha];
     adyacentes=adyacentes.filter(x => x!=undefined);
     return adyacentes;
@@ -176,7 +176,50 @@ function qs(arr){
   }
   else {
     var pivote=arr.pop();
-    return [].concat(qs(arr.filter((x)=>x.puntaje<pivote.puntaje)), [pivote], qs(arr.filter((x)=>x.puntaje>=pivote.puntaje)))
+    return [].concat(qs(arr.filter((x)=>x.puntaje>pivote.puntaje)), [pivote], qs(arr.filter((x)=>x.puntaje<=pivote.puntaje)))
   }
 
 }
+
+function recorre_profundidad(nodo){
+  profundidad=[];
+  punt=nodo;
+  while(punt.getHijo()!=null){
+    profundidad.push(punt.getDato());
+    punt=punt.getHijo();
+    /*
+    if (punt==null){
+      profundidad.push(punt.getDato());
+      break;
+    }
+    */
+  }
+  profundidad.push(punt.getDato());
+  return profundidad;
+}
+
+function ver_nivel(nodo){
+  hermanos=[];
+  punt=nodo;
+  hermanos.push(nodo);
+  while (punt.getHermano()!=null){
+    hermanos.push(punt.getHermano());
+    punt=punt.getHermano();
+  }
+  return hermanos;
+}
+/*
+class EleccionMovimientos {
+  constructor(posibilidades, eleccion, intentos) {
+    //lista posibilidades
+    this.posibilidades=qs(posibilidades);
+    //posibilidad elegida
+    this.eleccion=eleccion;
+    //lista de intentos
+    this.intentos=intentos;
+  }
+
+  
+
+}
+*/
